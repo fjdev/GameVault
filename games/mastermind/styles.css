@@ -37,3 +37,6 @@ button{font:inherit;cursor:pointer;color:inherit}button:focus-visible{outline:2p
 @media(max-width:699px){.board-rows{max-height:min(42vh,350px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}.board-rows::-webkit-scrollbar{display:none}.play-dock{position:relative;bottom:auto}}
 
 .vault-back-link{display:table;margin:0 auto 15px;padding:7px 12px;border:1px solid #9d776d77;border-radius:6px;text-decoration:none;color:#f1ceb2;font:700 10px Arial,sans-serif;letter-spacing:.13em;background:#201312aa}.vault-back-link:focus-visible{outline:2px solid #f3dabc}
+
+/* English title sizing on narrow phones. */
+.home-heading h1{font-size:clamp(32px,8.4vw,48px);letter-spacing:-.045em}.title-spark{display:none}.topbar-logo{font-size:13px}

@@ -1,22 +1,22 @@
 /** Pure rules: no browser dependencies. */
 export const COLORS = [
-  {id:'white',name:'Blanco',hex:'#f7eee0',light:'#ffffff',dark:'#b7a595'},
-  {id:'red',name:'Rojo',hex:'#d93d32',light:'#fc9c7b',dark:'#711c1d'},
-  {id:'black',name:'Negro',hex:'#30313b',light:'#898994',dark:'#07070b'},
-  {id:'yellow',name:'Amarillo',hex:'#f4c334',light:'#fff4a0',dark:'#9e5717'},
-  {id:'blue',name:'Azul',hex:'#2682d2',light:'#a2d5ff',dark:'#143b7e'},
-  {id:'green',name:'Verde',hex:'#40a46e',light:'#a2f4a1',dark:'#175d3d'},
-  {id:'orange',name:'Naranja',hex:'#ed7f2f',light:'#ffd28d',dark:'#9e381c'},
-  {id:'brown',name:'Marrón',hex:'#876045',light:'#ddac81',dark:'#36251e'},
-  {id:'purple',name:'Morado',hex:'#a071c8',light:'#dfb9fa',dark:'#513274'},
-  {id:'pink',name:'Rosa',hex:'#e78fa7',light:'#ffe0e5',dark:'#9d435f'}
+  {id:'white',name:'White',hex:'#f7eee0',light:'#ffffff',dark:'#b7a595'},
+  {id:'red',name:'Red',hex:'#d93d32',light:'#fc9c7b',dark:'#711c1d'},
+  {id:'black',name:'Black',hex:'#30313b',light:'#898994',dark:'#07070b'},
+  {id:'yellow',name:'Yellow',hex:'#f4c334',light:'#fff4a0',dark:'#9e5717'},
+  {id:'blue',name:'Blue',hex:'#2682d2',light:'#a2d5ff',dark:'#143b7e'},
+  {id:'green',name:'Green',hex:'#40a46e',light:'#a2f4a1',dark:'#175d3d'},
+  {id:'orange',name:'Orange',hex:'#ed7f2f',light:'#ffd28d',dark:'#9e381c'},
+  {id:'brown',name:'Brown',hex:'#876045',light:'#ddac81',dark:'#36251e'},
+  {id:'purple',name:'Purple',hex:'#a071c8',light:'#dfb9fa',dark:'#513274'},
+  {id:'pink',name:'Pink',hex:'#e78fa7',light:'#ffe0e5',dark:'#9d435f'}
 ];
 
 export const LEVELS = {
-  easy: {label:'Easy',subtitle:'Para empezar',slots:4,colorCount:4,maxAttempts:12,repeats:false,num:'01'},
-  normal: {label:'Normal',subtitle:'Un paso más',slots:4,colorCount:6,maxAttempts:12,repeats:false,num:'02'},
-  hard: {label:'Hard',subtitle:'El tablero clásico',slots:5,colorCount:8,maxAttempts:10,repeats:true,num:'03'},
-  expert: {label:'Expert',subtitle:'Desafío progresivo',slots:5,colorCount:8,maxAttempts:10,repeats:true,num:'04'}
+  easy: {label:'Easy',subtitle:'Getting started',slots:4,colorCount:4,maxAttempts:12,repeats:false,num:'01'},
+  normal: {label:'Normal',subtitle:'A step further',slots:4,colorCount:6,maxAttempts:12,repeats:false,num:'02'},
+  hard: {label:'Hard',subtitle:'The classic board',slots:5,colorCount:8,maxAttempts:10,repeats:true,num:'03'},
+  expert: {label:'Expert',subtitle:'Progressive challenge',slots:5,colorCount:8,maxAttempts:10,repeats:true,num:'04'}
 };
 
 export function expertSettings(stage=1) {

@@ -52,9 +52,9 @@ function icon(name){
  return `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]||paths.question}</svg>`;
 }
 function peg(id,klass='',label=''){const c=colorLookup[id];return c?`<span class="peg ${klass}" style="--peg:${c.hex};--peg-light:${c.light};--peg-dark:${c.dark}" title="${c.name}" ${label?`aria-label="${label}"`:''}></span>`:`<span class="hole ${klass}"></span>`;}
-function crumb(){return '<div class="eyebrow">EDICIÓN DE BOLSILLO <span class="eyebrow-dot">✦</span> 2026</div>'}
+function crumb(){return '<div class="eyebrow">POCKET EDITION <span class="eyebrow-dot">✦</span> 2026</div>'}
 function header(title,back='home'){
- return `<div class="topbar"><button class="icon-btn" data-action="${back==='reset'?'ask-reset':`go-${back}`}" aria-label="Volver">${icon('back')}</button><div class="topbar-logo">SUPER <b>CÓDIGO</b></div><button class="icon-btn" data-action="open-rules" aria-label="Cómo jugar">${icon('question')}</button></div>${title?`<h1 class="screen-title">${title}</h1>`:''}`;
+ return `<div class="topbar"><button class="icon-btn" data-action="${back==='reset'?'ask-reset':`go-${back}`}" aria-label="Back">${icon('back')}</button><div class="topbar-logo">SUPER <b>MASTERMIND</b></div><button class="icon-btn" data-action="open-rules" aria-label="How to play">${icon('question')}</button></div>${title?`<h1 class="screen-title">${title}</h1>`:''}`;
 }
 function heroBoard(){
  let rows='';
@@ -63,41 +63,41 @@ function heroBoard(){
   const filled=i>=5;
   rows+=`<div class="sample-row">${Array.from({length:5},(_,j)=>peg(filled?colors[i-5][j]:null,'sample-peg')).join('')}<span class="sample-divider"></span>${Array.from({length:5},(_,j)=>i>=5&&j<(i===6?3:1)?`<span class="key-peg ${j===0?'black':'white'}"></span>`:'<span class="key-hole"></span>').join('')}</div>`;
  }
- return `<div class="hero-board"><div class="sample-code">${peg('red')}${peg('yellow')}${peg('blue')}${peg('green')}${peg('white')}</div>${rows}<div class="engraved">SUPER · CÓDIGO</div></div>`;
+ return `<div class="hero-board"><div class="sample-code">${peg('red')}${peg('yellow')}${peg('blue')}${peg('green')}${peg('white')}</div>${rows}<div class="engraved">SUPER · MASTERMIND</div></div>`;
 }
 function home(){
  return `<main class="page home-screen">
  <a class="vault-back-link" href="../../">← GAME VAULT</a>
- <div class="home-kicker">UN CLÁSICO DE LÓGICA · REINVENTADO</div>
- <div class="home-heading"><div class="word-light">SUPER</div><h1>CÓDIGO<span class="title-spark">✳</span></h1><p>Cinco posiciones. Un secreto.<br>Infinitas posibilidades.</p></div>
+ 
+ <div class="home-heading"><div class="word-light">SUPER</div><h1>MASTERMIND<span class="title-spark">✳</span></h1></div>
  <div class="hero-wrap"><div class="hero-glow"></div>${heroBoard()}</div>
- <div class="home-actions">
- <button class="mode-tile" data-action="go-levels"><div class="tile-icon">${icon('sun')}</div><span><strong>Jugar en solitario</strong><small>4 dificultades · Desafía tu lógica</small></span>${icon('arrow')}</button>
- <button class="mode-tile" data-action="go-local-setup"><div class="tile-icon">${icon('people')}</div><span><strong>Dos jugadores</strong><small>Un móvil · Por turnos</small></span>${icon('arrow')}</button>
+ <div class="home-actions">${state.game&&state.returnView?`<button class="mode-tile" data-action="resume-game"><div class="tile-icon">${icon('back')}</div><span><strong>Continue game</strong></span>${icon('arrow')}</button>`:''}
+ <button class="mode-tile" data-action="go-levels"><div class="tile-icon">${icon('sun')}</div><span><strong>Single player</strong></span>${icon('arrow')}</button>
+ <button class="mode-tile" data-action="go-local-setup"><div class="tile-icon">${icon('people')}</div><span><strong>Two players</strong></span>${icon('arrow')}</button>
  </div>
- <div class="home-footer"><button class="text-link" data-action="open-rules">${icon('info')} Cómo se juega</button><span>${stats.played} partidas · ${stats.won} victorias</span></div>
+ <div class="home-footer"><button class="text-link" data-action="open-rules">${icon('info')} How to play</button><span>${stats.played} games · ${stats.won} wins</span></div>
  </main>`;
 }
 function levels(){
- return `<main class="page narrow">${header('Elige tu desafío','home')}<p class="muted center intro">Empieza por lo sencillo o salta al desafío original. Cada combinación se genera al azar.</p>
+ return `<main class="page narrow">${header('Choose your challenge','home')}
  <div class="levels">${Object.entries(LEVELS).map(([key,l])=>{
  const s=key==='expert'?expertSettings(Math.max(1,stats.bestExpert||1)):l;
- return `<button class="level-card ${key==='expert'?'level-expert':''}" data-action="start-solo" data-value="${key}"><span class="level-index">${l.num}</span><span class="level-copy"><strong>${l.label}</strong><small>${key==='expert'?`Nivel ${Math.max(1,stats.bestExpert||1)} · ${l.subtitle}`:l.subtitle}</small><span class="level-spec">${s.slots} huecos <em>·</em> ${s.colorCount} colores <em>·</em> ${s.maxAttempts} intentos ${s.repeats?'· repeticiones':''}</span></span><span class="level-arrow">${icon('arrow')}</span></button>`;
- }).join('')}</div><p class="note center">En Experto, la dificultad aumenta cada vez que resuelves una combinación.</p></main>`;
+ return `<button class="level-card ${key==='expert'?'level-expert':''}" data-action="start-solo" data-value="${key}"><span class="level-index">${l.num}</span><span class="level-copy"><strong>${l.label}</strong><small>${key==='expert'?`Stage ${Math.max(1,stats.bestExpert||1)} · ${l.subtitle}`:l.subtitle}</small><span class="level-spec">${s.slots} slots <em>·</em> ${s.colorCount} colors <em>·</em> ${s.maxAttempts} guesses ${s.repeats?'· repeats':''}</span></span><span class="level-arrow">${icon('arrow')}</span></button>`;
+ }).join('')}</div></main>`;
 }
 function localSetup(){
- return `<main class="page narrow">${header('Dos jugadores','home')}
- <p class="muted center intro">Un jugador crea el código. El otro lo descifra. Os pasáis el móvil sin revelar la combinación.</p>
- <div class="setup-section"><div class="setting-head">01 <span>Elige tablero</span></div>
+ return `<main class="page narrow">${header('Two players','home')}
+ 
+ <div class="setup-section"><div class="setting-head">01 <span>Choose board</span></div>
  <div class="variant-pair">
- <button data-action="set-variant" data-value="super" class="variant ${state.variant==='super'?'selected':''}"><strong>SUPER</strong><span>5 posiciones</span><small>8 colores · 12 intentos</small></button>
- <button data-action="set-variant" data-value="classic" class="variant ${state.variant==='classic'?'selected':''}"><strong>CLÁSICO</strong><span>4 posiciones</span><small>6 colores · 10 intentos</small></button>
+ <button data-action="set-variant" data-value="super" class="variant ${state.variant==='super'?'selected':''}"><strong>SUPER</strong><span>5 slots</span><small>8 colors · 12 guesses</small></button>
+ <button data-action="set-variant" data-value="classic" class="variant ${state.variant==='classic'?'selected':''}"><strong>CLASSIC</strong><span>4 slots</span><small>6 colors · 10 guesses</small></button>
  </div></div>
- <div class="setup-section"><div class="setting-head">02 <span>Reglas de combinación</span></div>
- <button class="toggle-row" data-action="toggle-repeats"><span><strong>Permitir colores repetidos</strong><small>Un color puede aparecer varias veces</small></span><span class="toggle ${state.allowRepeats?'on':''}"><i></i></span></button>
+ <div class="setup-section"><div class="setting-head">02 <span>Code rules</span></div>
+ <button class="toggle-row" data-action="toggle-repeats"><span><strong>Allow repeated colors</strong><small>A color may appear more than once</small></span><span class="toggle ${state.allowRepeats?'on':''}"><i></i></span></button>
  </div>
- <div class="instruction-card"><div class="instruction-icon">${icon('lock')}</div><p>La app oculta el código al pasar el móvil. Quien lo creó coloca las pistas negras y blancas después de cada intento.</p></div>
- <button class="primary-btn wide" data-action="start-local">Empezar partida ${icon('arrow')}</button>
+ 
+ <button class="primary-btn wide" data-action="start-local">Start game ${icon('arrow')}</button>
  </main>`;
 }
 function currentSettings(){return state.game?.settings;}
@@ -117,38 +117,38 @@ function renderBoard(g,overridePhase=null){
   const active=(n===activeTurn && isInteractive);
   const vals=historyEntry?historyEntry.guess:isPending?pending:active?current:null;
   const clue=historyEntry?historyEntry:null;
-  rows+=`<div class="board-row ${active?'active-row':''} ${historyEntry?'past-row':''} ${isPending?'pending-row':''}" aria-label="Intento ${n}">
+  rows+=`<div class="board-row ${active?'active-row':''} ${historyEntry?'past-row':''} ${isPending?'pending-row':''}" aria-label="Guess ${n}">
   <span class="turn-number">${String(n).padStart(2,'0')}</span>
   <div class="guess-holes" style="--slots:${g.settings.slots}">${Array.from({length:g.settings.slots},(_,j)=>{
   const selected=active && g.selected===j;
   const body=peg(vals?vals[j]:null,selected?'selected-hole':'');
-  return active?`<button class="peg-btn ${selected?'chosen':''}" data-action="select-hole" data-value="${j}" aria-label="Posición ${j+1}">${body}</button>`:`<span class="peg-cell">${body}</span>`;
+  return active?`<button class="peg-btn ${selected?'chosen':''}" data-action="select-hole" data-value="${j}" aria-label="Slot ${j+1}">${body}</button>`:`<span class="peg-cell">${body}</span>`;
   }).join('')}</div>
   <div class="board-divider"></div>
   <div class="clue-holes" style="--clue-cols:${g.settings.slots>5?4:3}">${Array.from({length:g.settings.slots},(_,j)=>clue&&j<clue.black?'<span class="key-peg black"></span>':clue&&j<clue.black+clue.white?'<span class="key-peg white"></span>':'<span class="key-hole"></span>').join('')}</div>
  </div>`;
  }
- return `<div class="board-frame"><div class="board-toptag"><span>SUPER CÓDIGO</span><span>✦</span><span>EDICIÓN ORIGINAL</span></div><div class="board-rows">${rows}</div><div class="board-bottom"><span>INVICTA · 1975</span><span>EL ARTE DE DEDUCIR</span></div></div>`;
+ return `<div class="board-frame"><div class="board-toptag"><span>SUPER MASTERMIND</span><span>✦</span><span>ORIGINAL EDITION</span></div><div class="board-rows">${rows}</div><div class="board-bottom"><span>INVICTA · 1975</span><span>THE ART OF DEDUCTION</span></div></div>`;
 }
 function palette(g,phase){
  const vals=phase==='set-secret'?g.secret:g.draft;
  const filled=vals.filter(Boolean).length;
- const title=phase==='set-secret'?'Crea tu código secreto':'Elige tu combinación';
- return `<section class="play-dock"><div class="dock-top"><div><strong>${title}</strong><span>${filled} / ${g.settings.slots} posiciones</span></div><button class="icon-btn mini" data-action="clear-draft" aria-label="Borrar combinación">${icon('trash')}</button></div>
- <div class="palette" aria-label="Colores disponibles">${COLORS.slice(0,g.settings.colorCount).map(c=>`<button class="color-option" data-action="put-color" data-value="${c.id}" aria-label="Color ${c.name}">${peg(c.id)}<span>${c.name}</span></button>`).join('')}</div>
- <div class="dock-buttons"><button class="secondary-btn" data-action="undo">${icon('undo')} Deshacer</button><button class="primary-btn" data-action="${phase==='set-secret'?'lock-secret':'submit-guess'}" ${filled!==g.settings.slots?'disabled':''}>${phase==='set-secret'?'Ocultar código':'Confirmar intento'} ${icon(phase==='set-secret'?'lock':'arrow')}</button></div></section>`;
+ const title=phase==='set-secret'?'Create your secret code':'Choose your code';
+ return `<section class="play-dock"><div class="dock-top"><div><strong>${title}</strong><span>${filled} / ${g.settings.slots} slots</span></div><button class="icon-btn mini" data-action="clear-draft" aria-label="Clear code">${icon('trash')}</button></div>
+ <div class="palette" aria-label="Available colors">${COLORS.slice(0,g.settings.colorCount).map(c=>`<button class="color-option" data-action="put-color" data-value="${c.id}" aria-label="Color ${c.name}">${peg(c.id)}<span>${c.name}</span></button>`).join('')}</div>
+ <div class="dock-buttons"><button class="secondary-btn" data-action="undo">${icon('undo')} Undo</button><button class="primary-btn" data-action="${phase==='set-secret'?'lock-secret':'submit-guess'}" ${filled!==g.settings.slots?'disabled':''}>${phase==='set-secret'?'Hide code':'Submit guess'} ${icon(phase==='set-secret'?'lock':'arrow')}</button></div></section>`;
 }
 function secretPanel(g){
- return `<div class="secret-toggle"><button class="secondary-btn secret-button" data-action="toggle-secret">${icon(g.revealSecret?'hide':'eye')} ${g.revealSecret?'Taparlo':'Mostrar código secreto'}</button>
- ${g.revealSecret?`<div class="revealed-code"><span>CÓDIGO ORIGINAL</span><div class="revealed-pegs">${g.secret.map(c=>peg(c)).join('')}</div></div>`:'<p>Solo la persona que creó el código debe pulsarlo.</p>'}</div>`;
+ return `<div class="secret-toggle"><button class="secondary-btn secret-button" data-action="toggle-secret">${icon(g.revealSecret?'hide':'eye')} ${g.revealSecret?'Hide it':'Show secret code'}</button>
+ ${g.revealSecret?`<div class="revealed-code"><span>SECRET CODE</span><div class="revealed-pegs">${g.secret.map(c=>peg(c)).join('')}</div></div>`:''}</div>`;
 }
 function keeperDock(g){
  const numBlack=g.feedbackDraft.filter(x=>x==='black').length;
  const numWhite=g.feedbackDraft.filter(x=>x==='white').length;
- return `<section class="play-dock keeper-dock"><div class="dock-top"><div><strong>Coloca las pistas</strong><span>Negro = exacto · Blanco = desplazado</span></div></div>
- <div class="clue-input-row"><div class="clue-inputs">${Array.from({length:g.settings.slots},(_,i)=>`<button data-action="cycle-clue" data-value="${i}" class="clue-btn ${g.feedbackDraft[i]||''}" aria-label="Pista ${i+1}: ${g.feedbackDraft[i]||'sin pista'}">${g.feedbackDraft[i]?`<span class="key-peg ${g.feedbackDraft[i]}"></span>`:'<span class="key-hole"></span>'}</button>`).join('')}</div><div class="clue-count"><b>${numBlack}</b> negras <b>${numWhite}</b> blancas</div></div>
- <p class="clue-help">Toca cada hueco para alternar: sin pista → negro → blanco.</p>
- <div class="dock-buttons keeper-actions"><button class="secondary-btn" data-action="auto-feedback">${icon('check')} Calcular pistas</button><button class="primary-btn" data-action="submit-feedback">Confirmar pistas ${icon('arrow')}</button></div>
+ return `<section class="play-dock keeper-dock"><div class="dock-top"><div><strong>Place the clues</strong><span>Black = exact · White = wrong position</span></div></div>
+ <div class="clue-input-row"><div class="clue-inputs">${Array.from({length:g.settings.slots},(_,i)=>`<button data-action="cycle-clue" data-value="${i}" class="clue-btn ${g.feedbackDraft[i]||''}" aria-label="Clue ${i+1}: ${g.feedbackDraft[i]||'empty'}">${g.feedbackDraft[i]?`<span class="key-peg ${g.feedbackDraft[i]}"></span>`:'<span class="key-hole"></span>'}</button>`).join('')}</div><div class="clue-count"><b>${numBlack}</b> black <b>${numWhite}</b> white</div></div>
+ 
+ <div class="dock-buttons keeper-actions"><button class="secondary-btn" data-action="auto-feedback">${icon('check')} Calculate clues</button><button class="primary-btn" data-action="submit-feedback">Confirm clues ${icon('arrow')}</button></div>
  </section>`;
 }
 function game(){
@@ -156,54 +156,53 @@ function game(){
  if(!g) return home();
  const isSetter=g.phase==='set-secret';
  const isKeeper=g.phase==='keeper';
- const modeLabel=g.mode==='solo'?'UN JUGADOR':'DOS JUGADORES';
- const status=isSetter?'CREADOR DEL CÓDIGO':isKeeper?'CREADOR DEL CÓDIGO':'DESCIFRADOR';
+ const modeLabel=g.mode==='solo'?'SINGLE PLAYER':'TWO PLAYERS';
+ const status=isSetter?'CODE MAKER':isKeeper?'CODE MAKER':'CODE BREAKER';
  const turnCount=g.history.length+1;
- return `<main class="page game-page">${header('','reset')}
- <div class="game-heading"><div><div class="game-kicker">${modeLabel} <span>·</span> ${g.mode==='solo'?safeText(g.level==='expert'?`EXPERTO · NIVEL ${g.stage}`:LEVELS[g.level].label.toUpperCase()):g.settings.slots+' POSICIONES'}</div><h1>${isSetter?'Crea el secreto':isKeeper?'Da las pistas':'Descifra el código'}</h1></div><span class="role-badge">${icon(isSetter||isKeeper?'lock':'eye')} ${status}</span></div>
- <div class="status-line"><span><i class="status-dot"></i>${isSetter?'Solo tú puedes ver la combinación':isKeeper?'Comprueba el intento y marca las pistas':'Piensa antes de colocar tus piezas'}</span><b>${isSetter?'PREPARACIÓN':`${Math.min(turnCount,g.settings.maxAttempts)} / ${g.settings.maxAttempts} INTENTOS`}</b></div>
+ return `<main class="page game-page">${header('','menu')}
+ <div class="game-heading"><div><div class="game-kicker">${modeLabel} <span>·</span> ${g.mode==='solo'?safeText(g.level==='expert'?`EXPERT · STAGE ${g.stage}`:LEVELS[g.level].label.toUpperCase()):g.settings.slots+' SLOTS'}</div><h1>${isSetter?'Set the code':isKeeper?'Give clues':'Break the code'}</h1></div><span class="role-badge">${icon(isSetter||isKeeper?'lock':'eye')} ${status}</span></div>
+ <div class="status-line"><span><i class="status-dot"></i>${isSetter?'CODE HIDDEN':isKeeper?'CLUES':'YOUR TURN'}</span><b>${isSetter?'SETUP':`${Math.min(turnCount,g.settings.maxAttempts)} / ${g.settings.maxAttempts} GUESSES`}</b></div>
  ${isKeeper?secretPanel(g):''}
  <div class="game-board-holder">${renderBoard(g)}</div>
  ${isKeeper?keeperDock(g):palette(g,g.phase)}
- <button class="abandon" data-action="ask-reset">${icon('redo')} Reiniciar o salir de la partida</button>
+ <button class="abandon" data-action="go-menu">Back to game menu</button>
  </main>`;
 }
 function passScreen(){
  const g=state.game;
  if(!g)return home();
  const toSetter=g.phase==='handoff-to-keeper';
- return `<main class="page pass-screen">${header('','reset')}<div class="pass-content"><div class="pass-symbol"><div class="pass-ring r1"></div><div class="pass-ring r2"></div>${icon('lock')}</div>
- <div class="eyebrow">PANTALLA DE PRIVACIDAD</div><h1>${toSetter?'Turno del creador':'Turno del descifrador'}</h1><p>${toSetter?'El intento está guardado. Pasa el móvil a quien creó el código para que coloque las pistas.':'El código está oculto. Pasa el móvil a quien debe resolverlo.'}</p>
- <div class="handoff-notice">${icon('people')} Pasa el móvil antes de continuar</div>
- <button class="primary-btn wide" data-action="complete-handoff">${toSetter?'Soy el creador':'Estoy listo para jugar'} ${icon('arrow')}</button>
- <small>La combinación no aparece en esta pantalla.</small></div></main>`;
+ return `<main class="page pass-screen">${header('','menu')}<div class="pass-content"><div class="pass-symbol"><div class="pass-ring r1"></div><div class="pass-ring r2"></div>${icon('lock')}</div>
+ <div class="eyebrow">PRIVACY SCREEN</div><h1>${toSetter?'Code maker turn':'Code breaker turn'}</h1><p>${toSetter?'Your guess is saved. Pass the phone to the code maker to add clues.':'The code is hidden. Pass the phone to the code breaker.'}</p>
+ <div class="handoff-notice">${icon('people')} Pass the phone before continuing</div>
+ <button class="primary-btn wide" data-action="complete-handoff">${toSetter?'I am the code maker':'Ready to play'} ${icon('arrow')}</button>
+ <small>The code is hidden on this screen.</small></div></main>`;
 }
 function endScreen(){
  const g=state.game;
  if(!g) return home();
  const won=g.history.length>0 && g.history.at(-1).black===g.settings.slots;
  const isExpert=g.mode==='solo'&&g.level==='expert';
- const title=won?'¡Código descifrado!':g.mode==='solo'?'El código ganó':'¡Gana el creador!';
- const copy=won?`Has encontrado la combinación en ${g.history.length} ${g.history.length===1?'intento':'intentos'}.`:g.mode==='solo'?'Te has quedado sin intentos. Prueba con una nueva combinación.':'Se agotaron los intentos sin descubrir la combinación.';
- return `<main class="page end-screen">${header('','home')}<div class="end-body"><div class="result-star ${won?'success':'failure'}">${won?icon('star'):icon('lock')}</div><div class="eyebrow">PARTIDA TERMINADA</div><h1>${title}</h1><p>${copy}</p>
- <div class="end-code"><span>EL CÓDIGO ERA</span><div class="end-code-row">${g.secret.map(c=>peg(c)).join('')}</div></div>
- <div class="result-number"><strong>${String(g.history.length).padStart(2,'0')}</strong><span>INTENTOS EMPLEADOS</span></div>
- ${isExpert&&won?`<button class="primary-btn wide" data-action="next-expert">Siguiente nivel · ${g.stage+1} ${icon('arrow')}</button>`:`<button class="primary-btn wide" data-action="play-again">Nueva partida ${icon('arrow')}</button>`}
- <button class="secondary-btn wide" data-action="go-home">Volver al inicio</button>
+ const title=won?'Code cracked!':g.mode==='solo'?'The code wins':'Code maker wins!';
+ const copy=won?`You cracked the code in ${g.history.length} ${g.history.length===1?'guess':'guesses'}.`:g.mode==='solo'?'No guesses left. Try a new code.':'The code remained unbroken.';
+ return `<main class="page end-screen">${header('','home')}<div class="end-body"><div class="result-star ${won?'success':'failure'}">${won?icon('star'):icon('lock')}</div><div class="eyebrow">GAME OVER</div><h1>${title}</h1><p>${copy}</p>
+ <div class="end-code"><span>THE CODE WAS</span><div class="end-code-row">${g.secret.map(c=>peg(c)).join('')}</div></div>
+ <div class="result-number"><strong>${String(g.history.length).padStart(2,'0')}</strong><span>GUESSES USED</span></div>
+ ${isExpert&&won?`<button class="primary-btn wide" data-action="next-expert">Next stage · ${g.stage+1} ${icon('arrow')}</button>`:`<button class="primary-btn wide" data-action="play-again">New game ${icon('arrow')}</button>`}
+ <button class="secondary-btn wide" data-action="go-home">Back to menu</button>
  </div></main>`;
 }
 function rulesModal(){
- return `<div class="modal-backdrop" data-action="close-modal"><section class="modal-panel" role="dialog" aria-modal="true" aria-label="Cómo jugar"><div class="modal-title"><h2>Cómo se juega</h2><button data-action="close-modal" class="icon-btn" aria-label="Cerrar">${icon('close')}</button></div>
- <p>El objetivo es adivinar los colores secretos <strong>y su posición exacta</strong> antes de agotar los intentos.</p>
- <div class="rule-item"><div class="rule-example">${peg('red')}${peg('blue')}${peg('green')}${peg('yellow')}${peg('white')}</div><span>Coloca una combinación de colores en cada intento.</span></div>
- <div class="rule-item"><div class="rule-example"><span class="key-peg black"></span><span class="key-peg black"></span></div><span><strong>Negro:</strong> un color está en la posición correcta.</span></div>
- <div class="rule-item"><div class="rule-example"><span class="key-peg white"></span><span class="key-peg white"></span></div><span><strong>Blanco:</strong> el color está presente, pero en otra posición.</span></div>
- <p>Las pistas <strong>no indican a qué posición corresponden</strong>. Las fichas negras y blancas se calculan sin contar un color más veces de las que aparece.</p>
- <p>En <strong>solitario</strong>, la app genera el código y las pistas. En <strong>dos jugadores</strong>, una persona crea el código y coloca las pistas manualmente tras cada intento. Si se equivoca, puede usar «Calcular pistas».</p>
- <button class="primary-btn wide" data-action="close-modal">Entendido ${icon('check')}</button></section></div>`;
+ return `<div class="modal-backdrop" data-action="close-modal"><section class="modal-panel" role="dialog" aria-modal="true" aria-label="How to play"><div class="modal-title"><h2>How to play</h2><button data-action="close-modal" class="icon-btn" aria-label="Close">${icon('close')}</button></div>
+ <p>Find the secret colors <strong>in the correct order</strong> before you run out of guesses.</p>
+ <div class="rule-item"><div class="rule-example"><span class="key-peg black"></span></div><span><strong>Black:</strong> correct color and position.</span></div>
+ <div class="rule-item"><div class="rule-example"><span class="key-peg white"></span></div><span><strong>White:</strong> correct color, wrong position.</span></div>
+ <p>Clues do not identify individual slots. Each color is counted only as often as it appears in the secret.</p>
+ <p>In single player, the computer creates the code and clues. In two-player mode, the code maker gives clues after each guess. Use Calculate clues for automatic scoring.</p>
+ <button class="primary-btn wide" data-action="close-modal">Got it ${icon('check')}</button></section></div>`;
 }
 function resetModal(){
- return `<div class="modal-backdrop" data-action="close-modal"><section class="modal-panel small-modal" role="dialog" aria-modal="true" aria-label="Reiniciar partida"><div class="modal-title"><h2>¿Salir de la partida?</h2><button class="icon-btn" data-action="close-modal" aria-label="Cerrar">${icon('close')}</button></div><p>Se perderá el progreso de esta partida.</p><button class="primary-btn wide" data-action="reset-to-home">Salir al inicio</button><button class="secondary-btn wide" data-action="close-modal">Continuar jugando</button></section></div>`;
+ return `<div class="modal-backdrop" data-action="close-modal"><section class="modal-panel small-modal" role="dialog" aria-modal="true" aria-label="Restart game"><div class="modal-title"><h2>Leave this game?</h2><button class="icon-btn" data-action="close-modal" aria-label="Close">${icon('close')}</button></div><p>Progress in this game will be lost.</p><button class="primary-btn wide" data-action="reset-to-home">Leave game</button><button class="secondary-btn wide" data-action="close-modal">Keep playing</button></section></div>`;
 }
 function render(){
  let page;
@@ -215,12 +214,12 @@ function render(){
  document.body.className=`view-${state.view}`;
  persist();
 }
-function startSolo(level,stage=1){
+function startSolo(level,stage=1){state.returnView=null;
  const settings=level==='expert'?expertSettings(stage):LEVELS[level];
  state.game={mode:'solo',level,stage,settings:{...settings},secret:createSecret(settings),history:[],draft:Array(settings.slots).fill(null),selected:0,phase:'breaker',pendingGuess:null,feedbackDraft:[],revealSecret:false};
  setView('game');
 }
-function startLocal(){
+function startLocal(){state.returnView=null;
  const isSuper=state.variant==='super';
  const settings={slots:isSuper?5:4,colorCount:isSuper?8:6,maxAttempts:isSuper?12:10,repeats:state.allowRepeats};
  state.game={mode:'local',level:null,stage:1,settings,secret:Array(settings.slots).fill(null),history:[],draft:Array(settings.slots).fill(null),selected:0,phase:'set-secret',pendingGuess:null,feedbackDraft:[],revealSecret:false};
@@ -236,7 +235,7 @@ function updateGame(){persist();render()}
 function chooseColor(color){
  const g=state.game;
  const vals=g.phase==='set-secret'?g.secret:g.draft;
- if(!g.settings.repeats && vals.some((c,i)=>c===color&&i!==g.selected))return toast('En esta partida no se repiten colores.');
+ if(!g.settings.repeats && vals.some((c,i)=>c===color&&i!==g.selected))return toast('Repeated colors are not allowed in this game.');
  vals[g.selected]=color;
  g.selected=moveSelection(vals,g.selected);
  updateGame();
@@ -250,7 +249,7 @@ function finishGame(){
 }
 function submitGuess(){
  const g=state.game;
- if(!g.draft.every(Boolean))return toast('Completa todos los huecos.');
+ if(!g.draft.every(Boolean))return toast('Fill every slot.');
  const guess=[...g.draft];
  if(g.mode==='solo'){
   const feedback=scoreGuess(g.secret,guess);
@@ -284,13 +283,13 @@ function completeHandoff(){
 function applyAction(action,value){
  const g=state.game;
  switch(action){
-  case 'go-home':state.game=null;setView('home');break;
+  case 'go-home':state.game=null;state.returnView=null;setView('home');break;case 'go-menu':if(state.game){state.game.revealSecret=false;state.returnView=state.view;}setView('home');break;case 'resume-game':if(state.game&&state.returnView){const v=state.returnView;state.returnView=null;setView(v)}break;
   case 'go-levels':setView('levels');break;
   case 'go-local-setup':setView('local-setup');break;
   case 'open-rules':state.modal='rules';render();break;
   case 'close-modal':state.modal=null;render();break;
   case 'ask-reset':state.modal='reset';render();break;
-  case 'reset-to-home':state.game=null;setView('home');break;
+  case 'reset-to-home':state.game=null;state.returnView=null;setView('home');break;
   case 'set-variant':state.variant=value;updateGame();break;
   case 'toggle-repeats':state.allowRepeats=!state.allowRepeats;updateGame();break;
   case 'start-solo':startSolo(value,value==='expert'?Math.max(1,stats.bestExpert||1):1);break;
@@ -307,7 +306,7 @@ function applyAction(action,value){
   case 'auto-feedback':if(g&&g.phase==='keeper'){
    const {black,white}=scoreGuess(g.secret,g.pendingGuess);
    g.feedbackDraft=[...Array(black).fill('black'),...Array(white).fill('white'),...Array(g.settings.slots-black-white).fill(null)];
-   updateGame();toast('Pistas calculadas correctamente.');
+   updateGame();toast('Clues calculated.');
   }break;
   case 'submit-feedback':if(g&&g.phase==='keeper'){
    const black=g.feedbackDraft.filter(x=>x==='black').length;

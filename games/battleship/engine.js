@@ -1,4 +1,4 @@
-export const FLEET=[{name:'Portaaviones',size:5},{name:'Acorazado',size:4},{name:'Submarino',size:3},{name:'Patrullero',size:3},{name:'Destructor',size:2}];
+export const FLEET=[{name:'Carrier',size:5},{name:'Battleship',size:4},{name:'Submarine',size:3},{name:'Patrol boat',size:3},{name:'Destroyer',size:2}];
 export const emptySea=()=>Array(100).fill(-1);
 export function cellsFor(start,size,vertical){const r=Math.floor(start/10),c=start%10;const out=[];for(let t=0;t<size;t++){const rr=r+(vertical?t:0),cc=c+(vertical?0:t);if(rr>9||cc>9)return null;out.push(rr*10+cc)}return out}
 export function canPlace(sea,start,size,vertical){const cells=cellsFor(start,size,vertical);return cells&&cells.every(x=>sea[x]===-1)?cells:null}
