@@ -1,34 +1,56 @@
-# GAME VAULT · Primera versión jugable
+# Game Vault V3 — Vintage Fantasy RPG
 
-Una colección retro de juegos de mesa, alojable en GitHub Pages y diseñada como una PWA para móviles. **No requiere servidor, cuentas ni dependencias externas.** La cámara de cofres utiliza arte original hecho con CSS/SVG y una estética de fantasía oscura setentera/ochentera. Al abrir cada cofre, **cada juego mantiene su propia identidad visual**, sin elementos medievales dentro del tablero.
+**Game Vault** es una colección de tres juegos de mesa clásicos dentro de una PWA para móvil y escritorio. Se puede publicar gratis en GitHub Pages, sin cuentas ni servidor propio.
 
-## Incluye
+## Rediseño de la V3
 
-- **Mastermind / Super Código:** se ha integrado la versión anterior sin modificar sus reglas. Modo solitario con 5 dificultades y modo local de dos personas, pantallas de privacidad y pistas manuales o automáticas.
-- **Othello:** tablero verde con marco negro, disco bicolor, movimientos legales y volteo automático en ocho direcciones. Cinco niveles de rival (aleatorio, heurístico y minimax con poda alfa-beta), modo local, pase de turno cuando no hay jugadas y final por recuento de fichas.
-- **Battleship:** cuadrículas 10 × 10, flota clásica de cinco barcos (5, 4, 3, 3, 2); colocación manual o aleatoria y rotación; disparos, impactos, agua, hundimientos y victoria automática. Cinco dificultades de la máquina, desde azar hasta búsqueda probabilística, y modo local con pantalla de privacidad entre turnos.
-- Cada juego **guarda su progreso en el navegador** mediante `localStorage`; no se transmite información a ningún servidor.
+La portada y el selector de juegos se han reinterpretado como un módulo de RPG vintage de finales de los años setenta y ochenta:
 
-## Instalación en GitHub Pages
+- Portada de mazmorra ilustrada con piedra, antorchas y criatura guardiana.
+- Composición de libro de aventuras, con inventario de tres cofres sobre papel envejecido.
+- Tipografía de serif editorial, tintas marrón y rojo, textura de impresión antigua.
+- Cofres con ilustraciones originales de aspecto grabado; se abren visualmente al seleccionarlos.
+- Maquetación adaptable a pantallas de 320 px, móviles estándar y escritorio.
+- Todos los recursos son locales, sin depender de fuentes ni CDNs externos.
 
-1. Sube **el contenido** de esta carpeta a la raíz de tu repositorio en GitHub, incluido `.nojekyll`, `games/`, `assets/` y los archivos de la raíz.
-2. En **Settings → Pages**, selecciona **Deploy from a branch → main / (root)**.
-3. Accede a `https://TU_USUARIO.github.io/TU_REPOSITORIO/`.
-4. En iPhone, usa Safari → Compartir → Añadir a pantalla de inicio. En Android, usa el menú del navegador → Instalar aplicación o Añadir a pantalla de inicio.
-5. Después de la primera carga online, los recursos precargados pueden utilizarse sin conexión en navegadores compatibles. Para probar localmente: `python3 -m http.server 8080` y abre `http://localhost:8080`.
+**Los tableros de Mastermind, Othello y Battleship NO han cambiado de estilo.** Se han preservado sus motores y el funcionamiento de V2:
 
-## Estructura
+| Juego | Modo solitario | Modo 2 jugadores |
+| --- | --- | --- |
+| Mastermind | Easy / Normal / Hard / Expert | Un jugador oculta el código y otro deduce |
+| Othello | IA con cuatro niveles y espera variable | Tablero compartido por turnos |
+| Battleship | IA con cuatro niveles y espera variable | Flotas privadas, pasando el teléfono |
 
-- `index.html`, `vault.css`: cámara de cofres, portada de fantasía con animaciones.
-- `games/mastermind/`: versión preexistente, aislada visualmente.
-- `games/othello/engine.js`: reglas y niveles de IA de Othello.
-- `games/battleship/engine.js`: reglas, flotas y niveles de IA de Battleship.
-- `manifest.webmanifest`, `sw.js`, `assets/`: PWA, iconos y precarga offline.
-- `tests/`: pruebas de motores; ejecuta `npm test` con Node.js instalado.
+Battleship conserva sus señales visuales de **agua**, **impacto** y **barco hundido**. Othello y Battleship mantienen pausas de IA aleatorias de 1 a 2,8 segundos.
 
-## Notas
+## Publicar en GitHub Pages
 
-- El juego de Othello que aparece en tu foto muestra el sello **Milton Bradley**, no Pressman. Se utiliza como referencia visual el tablero **verde con carcasa negra** de la fotografía proporcionada.
-- Las fotografías adjuntas sirven como referencias visuales, no se han incrustado en los archivos publicados. Ningún arte original de caja, logotipo de fabricante ni personaje de otras franquicias se ha copiado al diseño.
-- El multijugador es en un solo móvil y **se basa en la confianza**. No existe sincronización en línea ni bloqueo de seguridad entre personas. En el mismo dispositivo, un usuario con acceso al almacenamiento del navegador puede inspeccionar los datos.
-- Esta es una **primera versión jugable**, no una reproducción idéntica de componentes comerciales ni un producto probado en todas las plataformas. Los algoritmos de IA son niveles orientativos, no equivalentes a un rival humano experto.
+1. Descomprime `game-vault-v3.zip`.
+2. Sube **el contenido de la carpeta** a la raíz de tu repositorio en GitHub; no subas solo el ZIP.
+3. En tu repositorio, entra en **Settings → Pages → Deploy from a branch**, elige rama `main`, carpeta `/(root)` y guarda.
+4. Abre la URL de GitHub Pages en el móvil e instala la PWA mediante **Añadir a pantalla de inicio** (Safari) o **Instalar aplicación** (Android).
+5. Si tenías una versión anterior instalada, recarga con conexión para actualizar el Service Worker (`game-vault-v3.0.0`). Si continúa mostrando la antigua, borra los datos del sitio y vuelve a instalar.
+
+En GitHub Pages, las partidas de dos jugadores **siguen siendo locales en el mismo dispositivo**. Para multijugador online sincronizado se necesitaría un servicio adicional.
+
+## Pruebas
+
+Requiere Node.js 18 o superior para ejecutar las pruebas:
+
+```bash
+npm test
+```
+
+La V3 ha pasado 13 pruebas automatizadas de reglas, opciones de dificultad y turnos. La portada ha sido comprobada mediante capturas de Chromium para escritorio de 1440 px, móvil de 390 px y móvil estrecho de 320 px. **La validación manual en un teléfono real sigue pendiente.**
+
+## Arquitectura
+
+- `index.html`, `vault.css`: menú de Game Vault V3.
+- `assets/art`: ilustraciones originales y textura impresa optimizadas para la web.
+- `games/mastermind`, `games/othello`, `games/battleship`: tres juegos independientes.
+- `sw.js`, `manifest.webmanifest`: caché offline e instalación.
+- `tests/`: pruebas automatizadas.
+
+## Arte y derechos
+
+Las imágenes de las portadas antiguas compartidas por el usuario sirven como referencias estéticas, pero **no están incrustadas en el proyecto**. Las ilustraciones de la V3 son recursos originales de prototipo con estética de grabado e impresión antigua, **no pinturas originales hechas a mano**. Para alcanzar plenamente la calidad pictórica de las referencias, sería necesario reemplazar estos recursos por ilustraciones artísticas de mayor calidad; no exige reconstruir los juegos.

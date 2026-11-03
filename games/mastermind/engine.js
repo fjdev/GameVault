@@ -13,11 +13,10 @@ export const COLORS = [
 ];
 
 export const LEVELS = {
-  beginner: {label:'Beginner',subtitle:'Primeros pasos',slots:4,colorCount:4,maxAttempts:12,repeats:false,num:'01'},
-  easy: {label:'Easy',subtitle:'Aprende a descifrar',slots:4,colorCount:6,maxAttempts:12,repeats:false,num:'02'},
-  medium: {label:'Medium',subtitle:'Empieza el desafío',slots:5,colorCount:6,maxAttempts:11,repeats:true,num:'03'},
-  hard: {label:'Hard',subtitle:'El tablero original',slots:5,colorCount:8,maxAttempts:10,repeats:true,num:'04'},
-  expert: {label:'Experto',subtitle:'Dificultad progresiva',slots:5,colorCount:8,maxAttempts:10,repeats:true,num:'05'}
+  easy: {label:'Easy',subtitle:'Para empezar',slots:4,colorCount:4,maxAttempts:12,repeats:false,num:'01'},
+  normal: {label:'Normal',subtitle:'Un paso más',slots:4,colorCount:6,maxAttempts:12,repeats:false,num:'02'},
+  hard: {label:'Hard',subtitle:'El tablero clásico',slots:5,colorCount:8,maxAttempts:10,repeats:true,num:'03'},
+  expert: {label:'Expert',subtitle:'Desafío progresivo',slots:5,colorCount:8,maxAttempts:10,repeats:true,num:'04'}
 };
 
 export function expertSettings(stage=1) {

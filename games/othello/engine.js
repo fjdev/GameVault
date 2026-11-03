@@ -14,11 +14,10 @@ if(!moves.length)return minimax(board,-turn,player,depth-1,alpha,beta,pass+1);
 let best=turn===player?-Infinity:Infinity;
 for(const pos of moves.sort((a,b)=>WEIGHTS[b]-WEIGHTS[a])){const next=makeMove(board,pos,turn).board;const value=minimax(next,-turn,player,depth-1,alpha,beta,0);if(turn===player){best=Math.max(best,value);alpha=Math.max(alpha,best)}else{best=Math.min(best,value);beta=Math.min(beta,best)}if(alpha>=beta)break}return best
 }
-export function chooseMove(board,player,difficulty='medium',rng=Math.random){const legal=legalMoves(board,player);if(!legal.length)return null;if(difficulty==='beginner')return legal[Math.floor(rng()*legal.length)];
-const depth=difficulty==='expert'?4:difficulty==='hard'?3:difficulty==='medium'?1:0;
+export function chooseMove(board,player,difficulty='normal',rng=Math.random){if(!['easy','normal','hard','expert'].includes(difficulty))difficulty='easy';const legal=legalMoves(board,player);if(!legal.length)return null;const depth=difficulty==='expert'?4:difficulty==='hard'?3:difficulty==='normal'?1:0;
 const ranked=legal.map(pos=>{const next=makeMove(board,pos,player);let value;
-if(difficulty==='easy')value=next.flips.length*10+WEIGHTS[pos]*.25;
+if(difficulty==='easy')value=next.flips.length*7+WEIGHTS[pos]*.2;
 else if(depth===1)value=score(next.board,player);
 else value=score(next.board,player)*.18+minimax(next.board,-player,player,depth-1,-Infinity,Infinity);
-return {pos,value:value+(rng()-.5)*(difficulty==='easy'?12:difficulty==='medium'?3:.04)}
+return {pos,value:value+(rng()-.5)*(difficulty==='easy'?12:difficulty==='normal'?3:.04)}
 }).sort((a,b)=>b.value-a.value);return ranked[0].pos}

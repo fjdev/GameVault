@@ -15,6 +15,7 @@ if(!state || !['home','levels','local-setup','game','pass','end'].includes(state
   state={view:'home',game:null,variant:'super',allowRepeats:true,modal:null};
 }
 state.modal=null;
+if(state.game?.mode==='solo' && !LEVELS[state.game.level]) state.game.level = state.game.level==='beginner'?'easy':'normal';
 if(state.game)state.game.revealSecret=false;
 if(state.game && (!Array.isArray(state.game.history)||!Array.isArray(state.game.secret))) {
   state={view:'home',game:null,variant:'super',allowRepeats:true,modal:null};
@@ -71,7 +72,7 @@ function home(){
  <div class="home-heading"><div class="word-light">SUPER</div><h1>CÓDIGO<span class="title-spark">✳</span></h1><p>Cinco posiciones. Un secreto.<br>Infinitas posibilidades.</p></div>
  <div class="hero-wrap"><div class="hero-glow"></div>${heroBoard()}</div>
  <div class="home-actions">
- <button class="mode-tile" data-action="go-levels"><div class="tile-icon">${icon('sun')}</div><span><strong>Jugar en solitario</strong><small>5 niveles · Desafía tu lógica</small></span>${icon('arrow')}</button>
+ <button class="mode-tile" data-action="go-levels"><div class="tile-icon">${icon('sun')}</div><span><strong>Jugar en solitario</strong><small>4 dificultades · Desafía tu lógica</small></span>${icon('arrow')}</button>
  <button class="mode-tile" data-action="go-local-setup"><div class="tile-icon">${icon('people')}</div><span><strong>Dos jugadores</strong><small>Un móvil · Por turnos</small></span>${icon('arrow')}</button>
  </div>
  <div class="home-footer"><button class="text-link" data-action="open-rules">${icon('info')} Cómo se juega</button><span>${stats.played} partidas · ${stats.won} victorias</span></div>

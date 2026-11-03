@@ -1,20 +1,73 @@
 <!doctype html>
-<html lang="es"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#110f14"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Game Vault"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="description" content="Una colección de juegos de mesa clásicos, guardados en cofres de una cámara fantástica."><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/icon-192.png"><link rel="apple-touch-icon" href="./assets/icon-192.png"><link rel="stylesheet" href="./vault.css"><title>Game Vault · The Collection</title></head>
-<body><div class="vault-app">
-<div class="room-haze" aria-hidden="true"></div>
-<header class="vault-header"><span class="crest" aria-hidden="true">✣</span><div class="overline">A COLLECTION OF CLASSIC GAMES</div><h1>GAME <span>VAULT</span></h1><div class="header-divider" aria-hidden="true"><i></i><b>✦</b><i></i></div><p>Entra en la cámara. Elige tu cofre.<br>Recupera la magia de jugar.</p></header>
-<section class="vault-room" aria-label="Colección de juegos">
-<div class="arch arch-one" aria-hidden="true"></div><div class="arch arch-two" aria-hidden="true"></div>
-<div class="vault-wall-art" aria-hidden="true"><svg viewBox="0 0 800 330" preserveAspectRatio="xMidYMid meet"><path d="M45 312V154Q400-156 755 154V312" fill="none" stroke="#635049" stroke-width="5"/><path d="M73 312V164Q400-120 727 164V312" fill="none" stroke="#261e23" stroke-width="25"/><path d="M140 286 Q400 0 660 286" fill="none" stroke="#a58564" stroke-width="2" stroke-dasharray="7 17" opacity=".6"/><path d="M300 260Q340 210 356 162L395 215 450 135 476 240 508 258" fill="none" stroke="#867154" stroke-width="2" opacity=".4"/><path d="m400 93 23 31 -23 30 -23-30z" fill="none" stroke="#e5b770" stroke-width="2"/><circle cx="400" cy="121" r="9" fill="#b54c31"/></svg></div>
-<div class="chest-grid">
-<a class="chest-option" href="./games/mastermind/" aria-label="Abrir el cofre de Mastermind"><div class="chest-sigil">I · THE CODE</div><div class="chest-object chest-amber"><div class="chest-rays"></div><div class="chest-lid"><div class="lid-detail"></div><div class="lid-cross"></div></div><div class="chest-mouth"></div><div class="chest-body"><div class="body-planks"></div><div class="chest-lock"><div class="keyhole"></div></div></div><div class="chest-shadow"></div></div><div class="chest-name">MASTERMIND</div><div class="chest-meta">EL ENIGMA DE LOS COLORES</div><span class="enter-label">ABRIR COFRE <span>✦</span></span></a>
-<a class="chest-option" href="./games/othello/" aria-label="Abrir el cofre de Othello"><div class="chest-sigil">II · THE DISC</div><div class="chest-object chest-emerald"><div class="chest-rays"></div><div class="chest-lid"><div class="lid-detail"></div><div class="lid-cross"></div></div><div class="chest-mouth"></div><div class="chest-body"><div class="body-planks"></div><div class="chest-lock"><div class="keyhole"></div></div></div><div class="chest-shadow"></div></div><div class="chest-name">OTHELLO</div><div class="chest-meta">LA BATALLA DE LAS DOS CARAS</div><span class="enter-label">ABRIR COFRE <span>✦</span></span></a>
-<a class="chest-option" href="./games/battleship/" aria-label="Abrir el cofre de Battleship"><div class="chest-sigil">III · THE FLEET</div><div class="chest-object chest-sapphire"><div class="chest-rays"></div><div class="chest-lid"><div class="lid-detail"></div><div class="lid-cross"></div></div><div class="chest-mouth"></div><div class="chest-body"><div class="body-planks"></div><div class="chest-lock"><div class="keyhole"></div></div></div><div class="chest-shadow"></div></div><div class="chest-name">BATTLESHIP</div><div class="chest-meta">EL COMBATE DE LAS FLOTAS</div><span class="enter-label">ABRIR COFRE <span>✦</span></span></a>
-</div>
-</section>
-<footer class="vault-footer"><span>✧</span> THREE RELICS · ONE VAULT <span>✧</span><small>CLASSIC TABLETOP COLLECTION · EDITION MMXXVI</small></footer>
-</div><script>
-for(const chest of document.querySelectorAll('.chest-option')){chest.addEventListener('click',event=>{if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;event.preventDefault();if(chest.classList.contains('opening'))return;chest.classList.add('opening');window.setTimeout(()=>location.assign(chest.href),540)})}
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17130f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Game Vault">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="Game Vault: tres juegos de mesa clásicos en una colección de fantasía RPG vintage.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./assets/icon-192.png">
+<link rel="apple-touch-icon" href="./assets/icon-192.png">
+<link rel="stylesheet" href="./vault.css">
+<title>Game Vault · The Treasure Chamber</title>
+</head>
+<body>
+<main class="vault" id="vault">
+  <div class="edition-strip" aria-hidden="true"><span>✦ &nbsp; THE FORGOTTEN GAMES &nbsp; ✦</span><span>VOL. I — MMXXVI</span></div>
+  <div class="vault-book">
+    <section class="cover" aria-labelledby="vault-title">
+      <div class="cover-art" role="img" aria-label="Entrada a una cámara de piedra antigua, con antorchas y un dragón en la oscuridad"></div>
+      <div class="cover-topline"><span>AN OLD-SCHOOL COLLECTION</span><span>✦ THE FIRST VOLUME ✦</span></div>
+      <div class="cover-masthead">
+        <div class="cover-insignia" aria-hidden="true">✧&nbsp; ⚔ &nbsp;✧</div>
+        <h1 id="vault-title">Game <span>Vault</span></h1>
+        <p>THE TREASURE CHAMBER</p>
+      </div>
+      <div class="cover-bottom">
+        <div class="cover-seal" aria-hidden="true">III <span>RELICS</span></div>
+        <div class="cover-verse">Tres juegos perdidos.<br>Tres cofres por abrir.<br><em>Una aventura por descubrir.</em></div>
+      </div>
+    </section>
+    <section class="folio" aria-labelledby="folio-heading">
+      <div class="folio-inner">
+        <div class="folio-rule"><span>✦</span><i></i><span>✦</span></div>
+        <p class="folio-overline">CHAPTER I &nbsp; / &nbsp; A CABINET OF CURIOSITIES</p>
+        <h2 id="folio-heading">Choose your <em>relic.</em></h2>
+        <p class="folio-intro">En la cámara del tesoro reposan tres cofres. Elige uno para descubrir el juego que guarda.</p>
+        <nav class="relic-list" aria-label="Elegir juego">
+          <a href="./games/mastermind/" class="relic relic-amber" aria-label="Abrir el cofre de Mastermind">
+            <span class="relic-index">I</span>
+            <span class="relic-art"><img class="chest-closed" src="./assets/art/chest-amber-ink.webp" alt=""><img class="chest-open" src="./assets/art/chest-amber-open-ink.webp" alt=""></span>
+            <span class="relic-copy"><small>THE HIDDEN CIPHER</small><strong>Mastermind</strong><span>Descifra el código secreto.</span><b>OPEN THE CHEST &nbsp; →</b></span>
+          </a>
+          <a href="./games/othello/" class="relic relic-emerald" aria-label="Abrir el cofre de Othello">
+            <span class="relic-index">II</span>
+            <span class="relic-art"><img class="chest-closed" src="./assets/art/chest-emerald-ink.webp" alt=""><img class="chest-open" src="./assets/art/chest-emerald-open-ink.webp" alt=""></span>
+            <span class="relic-copy"><small>THE TURNING DISC</small><strong>Othello</strong><span>Domina el tablero.</span><b>OPEN THE CHEST &nbsp; →</b></span>
+          </a>
+          <a href="./games/battleship/" class="relic relic-sapphire" aria-label="Abrir el cofre de Battleship">
+            <span class="relic-index">III</span>
+            <span class="relic-art"><img class="chest-closed" src="./assets/art/chest-sapphire-ink.webp" alt=""><img class="chest-open" src="./assets/art/chest-sapphire-open-ink.webp" alt=""></span>
+            <span class="relic-copy"><small>THE LOST FLEET</small><strong>Battleship</strong><span>Encuentra la flota enemiga.</span><b>OPEN THE CHEST &nbsp; →</b></span>
+          </a>
+        </nav>
+        <div class="folio-signoff"><span>✤</span><i>Fortune favors the curious.</i><span>✤</span></div>
+        <p class="folio-footnote">SOLO OR TWO PLAYERS · NO ACCOUNTS REQUIRED</p>
+      </div>
+    </section>
+  </div>
+  <footer class="imprint"><span>GAME VAULT © 2026</span><span>AN ADVENTURE IN THREE ACTS</span></footer>
+</main>
+<script>
+for(const chest of document.querySelectorAll('.relic'))chest.addEventListener('click',event=>{
+  if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  event.preventDefault();if(chest.classList.contains('opening'))return;
+  chest.classList.add('opening');setTimeout(()=>location.assign(chest.href),540);
+});
 if('serviceWorker'in navigator&&location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-</script></body></html>
+</script>
+</body>
+</html>
