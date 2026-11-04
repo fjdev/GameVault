@@ -160,7 +160,7 @@ function game(){
  const status=isSetter?'CODE MAKER':isKeeper?'CODE MAKER':'CODE BREAKER';
  const turnCount=g.history.length+1;
  return `<main class="page game-page">${header('','menu')}
- <div class="game-heading"><div><div class="game-kicker">${modeLabel} <span>·</span> ${g.mode==='solo'?safeText(g.level==='expert'?`EXPERT · STAGE ${g.stage}`:LEVELS[g.level].label.toUpperCase()):g.settings.slots+' SLOTS'}</div><h1>${isSetter?'Set the code':isKeeper?'Give clues':'Break the code'}</h1></div><span class="role-badge">${icon(isSetter||isKeeper?'lock':'eye')} ${status}</span></div>
+ <h1 class="play-title">MASTERMIND</h1><div class="game-heading"><div><div class="game-kicker">${modeLabel} <span>·</span> ${g.mode==='solo'?safeText(g.level==='expert'?`EXPERT · STAGE ${g.stage}`:LEVELS[g.level].label.toUpperCase()):g.settings.slots+' SLOTS'}</div><h1>${isSetter?'Set the code':isKeeper?'Give clues':'Break the code'}</h1></div><span class="role-badge">${icon(isSetter||isKeeper?'lock':'eye')} ${status}</span></div>
  <div class="status-line"><span><i class="status-dot"></i>${isSetter?'CODE HIDDEN':isKeeper?'CLUES':'YOUR TURN'}</span><b>${isSetter?'SETUP':`${Math.min(turnCount,g.settings.maxAttempts)} / ${g.settings.maxAttempts} GUESSES`}</b></div>
  ${isKeeper?secretPanel(g):''}
  <div class="game-board-holder">${renderBoard(g)}</div>

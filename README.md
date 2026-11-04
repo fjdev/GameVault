@@ -2,6 +2,10 @@
 
 A mobile-first, installable collection of **Mastermind**, **Othello**, and **Battleship**. The title screen shows an endless torchlit dungeon corridor in a deliberately limited 2D game style. Press Start opens the game selection panel over the same scene.
 
+## Version 7 visual update
+
+The corridor now advances through repeating 2D arch sprites rather than zooming and resetting a single picture. Each playable board uses a dedicated tactile image shell with a reduced, dithered finish: Othello's green inset and worn black rim, Battleship's blue molded console and complete ship miniatures, and Mastermind's copper-brown pegboard. The game titles and status bars have been enlarged to match the approved screen compositions more closely. All cells, discs, pegs and controls remain live HTML elements.
+
 ## Publish with GitHub Pages
 
 1. Extract this ZIP. Upload the **contents of the `game-vault` folder** to the root of a GitHub repository. `index.html`, `.nojekyll`, `games/`, and `assets/` should be at the repository root, not inside another folder.

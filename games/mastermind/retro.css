@@ -3,3 +3,21 @@ body{background-image:radial-gradient(ellipse at 50% 28%,#29231d 0,#080907 68%)}
 .board-row.active-row{background:#d0ae6a27;outline:2px solid #d0bd8a}
 .peg{box-shadow:inset 1px 1px 2px #fff8,0 2px 0 var(--peg-dark),0 4px 2px #1b120b9e}
 .game-heading h1,.home-heading h1,.screen-title{font-family:Georgia,serif;text-transform:uppercase;letter-spacing:1px}
+
+/* A photographed-then-reduced shell behind real, playable peg controls. */
+.game-board-holder .board-frame{width:100%;max-width:550px;aspect-ratio:4/5;margin:0 auto;padding:10% 9% 10% 8%;border:0;border-radius:0;background:url('../../assets/art/mastermind-board-v7.png') center/100% 100% no-repeat;box-shadow:none;overflow:hidden}
+.game-board-holder .board-frame::after{display:none}
+.board-toptag,.board-bottom{display:none}
+.board-rows{height:100%;max-height:none;overflow:visible;gap:0}
+.board-row{flex:1;min-height:0;padding:0 1%;gap:1.2%;grid-template-columns:20px minmax(0,1fr) 0 minmax(56px,24%);border-top:1px solid #eabb7752;border-bottom:1px solid #180b069c;background:transparent}
+.board-row.active-row{outline:1px solid #dbd08c;outline-offset:-2px;background:#f0d4881c}
+.board-row.pending-row{background:#f0d4880c}
+.board-divider{opacity:0}
+.turn-number{color:#f2d9af;text-shadow:1px 1px #230e09;font-family:VaultPixel,monospace;font-size:clamp(8px,2.4vw,12px)}
+.hole{box-shadow:inset 1px 2px 3px #070301,0 1px 1px #e8a85b92}
+.peg{box-shadow:inset 1px 1px 2px #fff9,0 2px 0 var(--peg-dark),1px 4px 3px #160a06c9}
+@media(max-width:370px){.game-board-holder .board-frame{padding:10% 8% 10% 7%}.board-row{grid-template-columns:17px minmax(0,1fr) 0 minmax(50px,24%);gap:1%}.guess-holes .peg,.guess-holes .hole{width:clamp(15px,5.3vw,22px);height:clamp(15px,5.3vw,22px)}}
+.game-page .play-title{text-align:center;font:700 clamp(30px,7.5vw,49px)/1.1 Georgia,serif;letter-spacing:2px;color:#f0e6c7;text-shadow:2px 3px #070503;margin:7px auto 12px}
+.game-page .game-heading{margin:0 auto;max-width:520px}.game-page .game-heading h1{font:12px VaultPixel,monospace;margin:4px 0;color:#e9e0c2}.game-page .status-line{max-width:520px;margin:0 auto 7px;padding:9px 13px;border:2px solid #b4c99c;color:#efe5c4;background:#0c100a;box-shadow:0 4px #0008}
+.game-board-holder .board-frame{padding-bottom:15%}
+.game-page .topbar-logo{font-size:0;letter-spacing:0}.game-page .topbar-logo::after{content:'Game\A Vault';white-space:pre;display:block;text-align:center;font:700 21px/.8 Georgia,serif;color:#e5e8cd;text-shadow:0 0 9px #879a6470,2px 2px #000}

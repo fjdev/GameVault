@@ -29,3 +29,26 @@ body{background-image:radial-gradient(ellipse at 50% 30%,#172733 0,#05090e 67%)}
 .ship-piece.vertical.middle::before{inset:19% 24% 19% -30%;clip-path:polygon(100% 15%,35% 15%,35% 38%,0 42%,0 58%,35% 62%,35% 85%,100% 85%)}
 .ship-piece.bow::before,.ship-piece.stern::before{content:"";position:absolute;z-index:2;width:28%;height:48%;top:24%;left:45%;border:1px solid #3a4c59;border-radius:50%;background:radial-gradient(circle at 30% 30%,#e7e8dc,#8c9999 55%,#4c5e66)}
 .ship-piece.vertical.bow::before,.ship-piece.vertical.stern::before{width:48%;height:28%;top:45%;left:24%}
+
+/* The molded console is an authored image; the 10x10 field stays interactive. */
+.console,.console-small{width:100%;max-width:560px;aspect-ratio:1;margin:11px auto;padding:10.5%;border:0;border-radius:0;background:url('../../assets/art/battleship-console-v7.png') center/100% 100% no-repeat;box-shadow:none;position:relative}
+.console::after{display:none}
+.console-title{position:absolute;top:3.3%;left:17%;right:17%;padding:0;justify-content:center;gap:12px;font-size:clamp(7px,2.2vw,12px);color:#efe4c4;text-shadow:1px 2px #00101e;pointer-events:none;z-index:1}
+.console-title span:last-child{display:none}
+.console-grid{width:100%;height:100%;aspect-ratio:1;gap:0;border:1px solid #3d8394;border-radius:0;box-shadow:0 0 0 2px #061629b8;background:transparent}
+.cell,.cell:nth-child(even),.cell.ship,.cell.hit,.cell.miss,.cell.sunk{background:linear-gradient(145deg,#22627b18,#051c2e20)!important;border:1px solid #4eabb2b5;box-shadow:inset 1px 1px #c5e0dc14,inset -1px -1px #01122391}
+.cell.available:hover{background:#79bbb947!important}
+.cell::before{opacity:.16}
+.ship-piece{filter:drop-shadow(1px 2px 1px #00111b)}
+.console-small .marker{font-size:9px}
+@media(max-width:390px){.console,.console-small{padding:10.5%}.console-title{top:3%}}
+.play-app .bar{margin-bottom:4px}.play-app .play-title{text-align:center;font:700 clamp(31px,8vw,55px)/1.1 Georgia,serif;letter-spacing:3px;color:#eee4c7;text-shadow:2px 3px #030b14;margin:8px auto 12px}
+.play-app .meta{max-width:560px;border:2px solid #8abdb6;background:#04111a;padding:9px 13px;margin:4px auto 7px;color:#e9e2c7;font-size:10px;box-shadow:0 4px #0009}
+.play-app .status{margin:5px auto 2px;font-size:12px;color:#eee6ca}.play-app .label{margin:4px auto 6px}
+/* One complete miniature is sampled across adjacent cells, retaining its silhouette. */
+.ship-piece,.ship-piece.vertical{inset:0;width:100%;height:100%;top:0;left:0;right:auto;bottom:auto;border:0;border-radius:0;clip-path:none;background:transparent url('../../assets/art/battleship-miniature-v7.png') var(--piece-pos) center / calc(var(--piece-size) * 100%) 100% no-repeat;box-shadow:none;filter:drop-shadow(0 2px 1px #000b)}
+.ship-piece::before,.ship-piece::after{display:none!important}
+.ship-piece.vertical{background:none;transform:none}
+.ship-piece.vertical::after{display:block!important;content:"";position:absolute;inset:0;width:100%;height:100%;border:0;box-shadow:none;background:transparent url('../../assets/art/battleship-miniature-v7.png') var(--piece-pos) center / calc(var(--piece-size) * 100%) 100% no-repeat;transform:rotate(90deg)}
+.play-app .bar{position:relative}.play-app .bar .brand{position:absolute;left:50%;top:-3px;transform:translateX(-50%);font-size:0;letter-spacing:0}
+.play-app .bar .brand::after{content:'Game\A Vault';white-space:pre;display:block;text-align:center;font:700 21px/.8 Georgia,serif;color:#e5e8cd;text-shadow:0 0 9px #879a6470,2px 2px #000}
