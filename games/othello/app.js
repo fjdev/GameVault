@@ -21,9 +21,9 @@ app.innerHTML=`<div class="app">${header()}<div class="game-meta"><div class="sc
 if(isAi)startThinking();save()
 }
 function newGame(){cancelAI();state.resumeScreen=null;state.board=initialBoard();state.turn=1;state.log=[];state.message='';state.recentFlips=[];state.lastPlaced=null;state.screen='game';save();draw()}
-function afterMove(flipCount){const current=state.turn,other=-current;const actor=state.mode==='solo'?(current===-1?'Computer':'You'):`Player ${current===1?'1':'2'}`;const actionNote=flipCount?`${actor}: ${flipCount} ${flipCount===1?'disc flipped':'discs flipped'}. `:'';
+function afterMove(flipCount){const current=state.turn,other=-current;const actor=state.mode==='solo'?(current===-1?'Computer':'You'):`Player ${current===1?'1':'2'}`;const actionNote='';
 if(finished(state.board)){state.screen='end';state.message=actionNote+'Neither player has a legal move.';save();draw();return}
-state.turn=other;if(!legalMoves(state.board,other).length){state.turn=current;state.message=actionNote+`Las ${other===1?'black':'white'} pass: no legal moves.`}else{state.message=actionNote+(state.mode==='solo'&&state.turn===-1?'Waiting for the opponent.':'')}
+state.turn=other;if(!legalMoves(state.board,other).length){state.turn=current;state.message=actionNote+`${other===1?'black':'white'} pass: no legal moves.`}else{state.message=actionNote+(state.mode==='solo'&&state.turn===-1?'Waiting for the opponent.':'')}
 if(state.mode==='local'&&state.turn!==current)state.screen='pass';save();draw()}
 function aiMove(){if(state.screen!=='game'||state.mode!=='solo'||state.turn!==-1)return;const p=chooseMove(state.board,-1,state.difficulty);if(p===null){state.turn=1;state.message='The computer has no legal move and passes.';save();draw();return}const next=makeMove(state.board,p,-1);if(next){state.board=next.board;state.recentFlips=next.flips;state.lastPlaced=p;state.log.push(p);afterMove(next.flips.length)}}
 function play(i){if(state.screen!=='game'||(state.mode==='solo'&&state.turn===-1))return;const next=makeMove(state.board,i,state.turn);if(!next)return;state.board=next.board;state.recentFlips=next.flips;state.lastPlaced=i;state.log.push(i);afterMove(next.flips.length)}

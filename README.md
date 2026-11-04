@@ -1,29 +1,48 @@
-# Game Vault V5 — Endless Dungeon
+# Game Vault
 
-The home screen is now a low-resolution first-person dungeon corridor with ordered dithering, repeating paired torches and an endless forward walk. The background is rendered locally in Canvas; it is not a downloaded video and needs no network connection after installation.
+A mobile-first, installable collection of **Mastermind**, **Othello**, and **Battleship**. The title screen shows an endless torchlit dungeon corridor in a deliberately limited 2D game style. Press Start opens the game selection panel over the same scene.
 
-## Menu
+## Publish with GitHub Pages
 
-- Press Start with a tap, Enter or Space.
-- Select Mastermind, Othello or Battleship with a tap or keyboard.
-- Arrow keys change selection; Enter opens the selected game; Escape returns to the title.
-- Pause / Play stops and resumes the corridor. Reduced-motion settings start it paused.
-- The background remains visible behind both screens.
+1. Extract this ZIP. Upload the **contents of the `game-vault` folder** to the root of a GitHub repository. `index.html`, `.nojekyll`, `games/`, and `assets/` should be at the repository root, not inside another folder.
+2. In the repository, open **Settings → Pages**. Set **Build and deployment** to **Deploy from a branch**, select your main branch and **`/ (root)`**, then save.
+3. Open the HTTPS URL GitHub Pages provides. On a phone, use the browser's **Add to Home Screen / Install** action to install the app.
 
-The custom Game Vault title takes its lettering direction from vintage fantasy RPG covers. Menu options use an original bundled bitmap alphabet; no external font request is needed.
+You can also publish the files on any static HTTPS host. There is no build step, backend, account, or external CDN dependency. Relative paths support both a repository subpath and a custom domain.
 
-## Run
+## Run locally
 
-Serve the extracted directory with `python3 -m http.server 8000`, then open http://localhost:8000. Run `npm test` with Node 18+.
+From the extracted `game-vault` directory:
 
-`dungeon-loop-preview.gif` shows the background animation, exported from the same renderer. It is only a preview: the app draws the animation live and never loads that GIF.
+```bash
+python3 -m http.server 8000
+```
 
-## Preserved / pending
+Open `http://localhost:8000`. Opening `index.html` directly via `file://` will not run the module or service worker correctly.
 
-All three existing game engines, four difficulty levels, solo/local modes, storage keys, game menus, resume behavior and computer-turn delays are preserved. The approved physical-board redesign is still pending; it has not been included in this menu-focused release. Existing game screens retain V3.1 layouts with English text.
+## Controls and features
 
-19 automated tests pass. The rendered loop boundary was also checked byte-for-byte at 0 and 16 seconds. Browser/device visual QA, installation, offline upgrades and performance on real phones remain unverified. This release has not been published.
+- Tap **Press Start**, or press Enter/Space. Select a game by tap or with arrow keys and Enter. Escape returns to the title screen.
+- Pause or resume the corridor with the on-screen control. A reduced-motion preference starts it paused.
+- All three games support solo and local two-player play. Solo play has Easy, Normal, Hard, and Expert difficulty. Games save their state in local browser storage.
+- Mastermind uses a physical peg board, Othello a green board with black and ivory discs, and Battleship a two-board blue plastic console with miniature ships.
+- All interface text is English. The site is offline-ready after the first successful load through its service worker.
 
-## GitHub Pages
+## Tests
 
-Upload the extracted files to the repository root and enable Pages from that branch/root. Relative paths work under a repository subdirectory. Installation requires the deployed HTTPS URL. Service-worker assets and cache version were updated for this release.
+Node.js 18 or newer:
+
+```bash
+npm test
+```
+
+The test suite checks game engines, game flows, and title/menu interaction. Visual behavior should also be checked on the target phone after GitHub Pages deploys; the CSS adapts to narrow screens.
+
+## Project structure
+
+- `index.html`, `vault.css`, `vault.js`, `dungeon.js`: title screen, menu, and corridor loop.
+- `assets/`: bundled artwork, font, and PWA icons.
+- `games/mastermind/`, `games/othello/`, `games/battleship/`: the independent games and their engines.
+- `games/physical.css` and `games/retro.css`: common game presentation.
+- `manifest.webmanifest`, `sw.js`: install and offline support.
+- `tests/`: automated checks.

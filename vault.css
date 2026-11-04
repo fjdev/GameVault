@@ -13,3 +13,27 @@
 @media(min-width:760px){.vault{border-left:1px solid #1b201d;border-right:1px solid #1b201d}}
 @media(max-height:600px){.wordmark{top:1%;left:19%;width:62%}.title-screen{top:60%}.game-menu{top:37%;padding:4px}.game-menu h2{margin-bottom:4px}.game-menu nav{gap:0}.game-menu a{min-height:42px;font-size:16px}.back{margin-top:0;min-height:32px}.footer{bottom:2%}.vault[data-screen="menu"] .wordmark{transform:translateY(-13%) scale(.7)}}
 @media(prefers-reduced-motion:reduce){.press-start{animation:none}.wordmark,.departure{transition:none}}
+/* Smaller high-set title, with an atmospheric restrained aura. */
+.wordmark{top:2%;left:20%;width:60%;filter:drop-shadow(0 0 8px #8cbee75c);animation:title-aura 5s ease-in-out infinite alternate}
+.wordmark::before{content:"";position:absolute;inset:12% 2%;background:radial-gradient(ellipse,#78a7d91c,transparent 68%);filter:blur(14px);z-index:-1}
+.vault[data-screen="menu"] .wordmark{transform:scale(.86) translateY(-4%)}
+@keyframes title-aura{from{filter:drop-shadow(0 0 5px #86acd438)}to{filter:drop-shadow(0 0 13px #9ac4ed80)}}
+@media(max-height:600px){.wordmark{top:0;left:28%;width:44%}.vault[data-screen="menu"] .wordmark{transform:scale(.9)}}
+@media(prefers-reduced-motion:reduce){.wordmark{animation:none}}
+/* Approved photographed-then-reduced corridor and independent title layer. */
+#dungeon{image-rendering:pixelated;object-fit:cover}
+.screen-shade{background:linear-gradient(#0006,transparent 37%,transparent 78%,#0009)}
+.wordmark,.vault[data-screen="menu"] .wordmark{top:3%;left:11%;width:78%;filter:drop-shadow(0 0 6px #8d9e4744);transform:none;animation:title-aura 4s steps(5,end) infinite alternate}
+.wordmark img{image-rendering:pixelated;filter:none}
+.wordmark::before{display:none}
+.title-screen{top:auto;bottom:7%;width:92%}
+.press-start{font-size:clamp(16px,4.7vw,23px);color:#f5edca;text-shadow:2px 2px #000;letter-spacing:2px}
+.game-menu{top:auto;bottom:6%;width:min(75%,380px);transform:translateX(-50%);padding:7px 12px 8px;border:2px solid #e8dfb9;background:#030403ec;box-shadow:0 0 0 2px #302d21,0 5px 0 #000,0 0 20px #000;outline:2px solid #17190f;outline-offset:3px}
+.game-menu h2{font-size:clamp(9px,2.5vw,13px);color:#eae0b9;margin:0 0 3px;border-bottom:1px solid #d8d1ae;padding:0 0 4px}
+.game-menu nav{gap:0}.game-menu a{min-height:32px;font-size:clamp(12px,3.2vw,18px);padding:1px 4px;gap:7px;line-height:1.2}
+.game-menu a:first-child,.game-menu a:focus-visible,.game-menu a:hover{background:#343d23a8;color:#fff2bf}
+.game-menu a:first-child .cursor{visibility:visible}.game-menu:focus-within a:first-child:not(:focus) .cursor{visibility:hidden}
+.game-menu .back{margin:5px 0 0;padding:0;min-height:28px;font-size:9px}
+.footer{bottom:1%;opacity:.8}.footer #footer-hint{display:none}.footer button{margin-left:auto;background:#0008}
+@media(max-height:600px){.wordmark,.vault[data-screen="menu"] .wordmark{top:0;left:27%;width:46%}.title-screen{bottom:6%}.game-menu{bottom:4%;padding:3px 8px}.game-menu a{min-height:25px}.game-menu .back{min-height:24px}}
+@media(prefers-reduced-motion:reduce){.wordmark,.vault[data-screen="menu"] .wordmark{animation:none}}

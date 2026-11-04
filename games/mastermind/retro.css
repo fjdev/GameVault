@@ -1,0 +1,5 @@
+body{background-image:radial-gradient(ellipse at 50% 28%,#29231d 0,#080907 68%)}
+.board-frame{margin-top:12px;background:linear-gradient(120deg,#9b6c3e,#6f4429 14%,#5a3723 84%,#39251a);box-shadow:inset 2px 2px #ba8b5a,inset -4px -4px #2a1b13,0 7px #24170e,0 17px 22px #000a}
+.board-row.active-row{background:#d0ae6a27;outline:2px solid #d0bd8a}
+.peg{box-shadow:inset 1px 1px 2px #fff8,0 2px 0 var(--peg-dark),0 4px 2px #1b120b9e}
+.game-heading h1,.home-heading h1,.screen-title{font-family:Georgia,serif;text-transform:uppercase;letter-spacing:1px}

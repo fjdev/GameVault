@@ -1,0 +1,22 @@
+@font-face{font-family:VaultPixel;src:url('../assets/fonts/vault-pixel.ttf') format('truetype');font-display:swap}
+:root{--retro-ivory:#e9e4c9;--retro-olive:#748052}
+html,body{background:#080b09;color:var(--retro-ivory)}
+body{background-image:radial-gradient(ellipse at 50% 34%,#20231a 0,#080b09 62%)}
+.app,.page{padding-top:7px}
+.bar,.topbar{margin:0 0 4px;min-height:40px}
+.brand,.topbar-logo{font:14px VaultPixel,monospace;color:#e6e0c5;letter-spacing:1px}
+.back,.vault-back-link,.icon-btn{font-family:VaultPixel,monospace;font-size:11px;color:#e6e0c5}
+.logo,.screen-title,.game-heading h1{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-transform:uppercase;color:#f0e9ce;letter-spacing:2px;text-shadow:2px 2px 0 #080908}
+.logo{margin:12px auto 15px;font-size:clamp(31px,7.5vw,46px)}
+.meta,.game-meta,.status,.label,.instructions,.console-title,.board-toptag,.board-bottom,.dock-top,.level,.mainbtn,.auxbtn,.primary-btn,.secondary-btn,.fleet-ship,.buttonrow,.result,.pass{font-family:VaultPixel,monospace}
+.meta,.game-meta{color:#c9c7a7;margin:9px auto 8px}
+.status{color:#e8e5c7;font-size:12px;margin:12px auto}
+.label,.instructions{color:#a9ab92}
+.mainbtn,.primary-btn{background:#bdc69d;border:2px solid #d7dfb7;border-radius:2px;color:#171d12;box-shadow:inset -3px -3px #809065,3px 3px #000;font-size:12px}
+.auxbtn,.secondary-btn,.level{border-radius:2px;background:#171b17;color:#e1e0c3;border:1px solid #687453;box-shadow:2px 2px #000;font-size:11px}
+.level.selected{background:#52623b;color:#fff6d9;border-color:#b4c191}
+.card,.panel{color:#e9e4c9}
+/* Dither belongs to the highlights and frame shadows; playing cells stay clear. */
+.board-frame,.console{position:relative;isolation:isolate}
+.board-frame::after,.console::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:.15;background:repeating-conic-gradient(#d5d5ae 0 25%,transparent 0 50%) 0 0/4px 4px;mask-image:linear-gradient(#000,transparent 38%,transparent 70%,#000)}
+@media(max-width:390px){.bar,.topbar{min-height:36px}.logo{margin:5px auto 12px}.status{font-size:10px}}
