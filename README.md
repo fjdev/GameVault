@@ -1,23 +1,29 @@
-# Game Vault V4
+# Game Vault V5 — Endless Dungeon
 
-Painted treasury home screen, based on the approved vaulted room concept. All game menus, instructions, feedback and accessibility labels are in English.
+The home screen is now a low-resolution first-person dungeon corridor with ordered dithering, repeating paired torches and an endless forward walk. The background is rendered locally in Canvas; it is not a downloaded video and needs no network connection after installation.
+
+## Menu
+
+- Press Start with a tap, Enter or Space.
+- Select Mastermind, Othello or Battleship with a tap or keyboard.
+- Arrow keys change selection; Enter opens the selected game; Escape returns to the title.
+- Pause / Play stops and resumes the corridor. Reduced-motion settings start it paused.
+- The background remains visible behind both screens.
+
+The custom Game Vault title takes its lettering direction from vintage fantasy RPG covers. Menu options use an original bundled bitmap alphabet; no external font request is needed.
 
 ## Run
 
-Serve this directory with `python3 -m http.server 8000`, then open http://localhost:8000. Run `npm test` with Node 18 or newer.
+Serve the extracted directory with `python3 -m http.server 8000`, then open http://localhost:8000. Run `npm test` with Node 18+.
 
-## Preserved
+`dungeon-loop-preview.gif` shows the background animation, exported from the same renderer. It is only a preview: the app draws the animation live and never loads that GIF.
 
-Mastermind, Othello and Battleship rules; Easy, Normal, Hard and Expert; solo and local two-player modes; existing storage keys; game menus and resume; variable computer delays; hit, miss and sunk feedback.
+## Preserved / pending
 
-## Changes
+All three existing game engines, four difficulty levels, solo/local modes, storage keys, game menus, resume behavior and computer-turn delays are preserved. The approved physical-board redesign is still pending; it has not been included in this menu-focused release. Existing game screens retain V3.1 layouts with English text.
 
-The home screen uses the approved painted room with three accessible chest links. The full illustration stays visible at every screen ratio, with dark margins when needed. English title sizing was adjusted for Mastermind. Service-worker caches were versioned; the legacy Mastermind worker now deletes only its own old caches.
-
-The interiors retain their V3.1 visual treatment. This release does not claim completion of the planned physical-board redesign.
+19 automated tests pass. The rendered loop boundary was also checked byte-for-byte at 0 and 16 seconds. Browser/device visual QA, installation, offline upgrades and performance on real phones remain unverified. This release has not been published.
 
 ## GitHub Pages
 
-Upload the extracted contents to the repository root and enable Pages from that branch/root. Relative links support repository subpaths. Open the deployed HTTPS URL to install the PWA. No account or backend is required.
-
-Device installation, offline operation and upgrades still need testing on real iOS/Android devices. This archive has not been published.
+Upload the extracted files to the repository root and enable Pages from that branch/root. Relative paths work under a repository subdirectory. Installation requires the deployed HTTPS URL. Service-worker assets and cache version were updated for this release.

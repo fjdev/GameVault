@@ -1,3 +1,33 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101c2a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Game Vault"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="description" content="Three classic board games in a painted fantasy treasure chamber."><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/icon-192.png"><link rel="apple-touch-icon" href="./assets/icon-192.png"><link rel="stylesheet" href="./vault.css"><title>Game Vault · The Treasure Chamber</title></head>
-<body><main class="chamber" aria-label="Game Vault"><img class="chamber-art" src="./assets/art/vault-room.webp" alt="A torchlit stone vault with three treasure chests" width="941" height="1672" fetchpriority="high"><h1 class="sr-only">Game Vault</h1><nav aria-label="Choose a chest"><a class="chest mastermind" href="./games/mastermind/" aria-label="Open Mastermind"><span class="sr-only">Mastermind</span></a><a class="chest othello" href="./games/othello/" aria-label="Open Othello"><span class="sr-only">Othello</span></a><a class="chest battleship" href="./games/battleship/" aria-label="Open Battleship"><span class="sr-only">Battleship</span></a></nav></main><script>if('serviceWorker' in navigator && location.protocol!=='file:')addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080a0a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Game Vault"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="Three classic board games. An endless dungeon. Press start.">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/icon-192.png"><link rel="apple-touch-icon" href="./assets/icon-192.png">
+<link rel="preload" href="./assets/fonts/vault-pixel.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="./vault.css"><title>Game Vault</title>
+</head>
+<body>
+<main class="vault" data-screen="title">
+ <canvas id="dungeon" aria-hidden="true" width="240" height="400"></canvas>
+ <div class="screen-shade" aria-hidden="true"></div>
+ <header class="wordmark"><h1><img src="./assets/art/game-vault-title.png" alt="Game Vault" width="1536" height="1024" fetchpriority="high"></h1></header>
+ <section class="title-screen" id="title-screen" aria-label="Title screen">
+  <button id="start" class="press-start">PRESS START</button>
+ </section>
+ <section class="game-menu" id="game-menu" aria-labelledby="menu-title" hidden>
+  <h2 id="menu-title">SELECT A GAME</h2>
+  <nav aria-label="Games">
+   <a href="./games/mastermind/" data-game="mastermind"><span class="cursor" aria-hidden="true">&gt;</span> MASTERMIND</a>
+   <a href="./games/othello/" data-game="othello"><span class="cursor" aria-hidden="true">&gt;</span> OTHELLO</a>
+   <a href="./games/battleship/" data-game="battleship"><span class="cursor" aria-hidden="true">&gt;</span> BATTLESHIP</a>
+  </nav>
+  <button id="back" class="back">&lt; BACK</button>
+ </section>
+ <footer class="footer"><span id="footer-hint">ENTER / TAP TO START</span><button id="motion" aria-pressed="false">PAUSE</button></footer>
+ <div class="departure" aria-hidden="true"></div>
+</main>
+<noscript><nav class="no-script" aria-label="Games"><a href="./games/mastermind/">MASTERMIND</a><a href="./games/othello/">OTHELLO</a><a href="./games/battleship/">BATTLESHIP</a></nav></noscript>
+<script type="module" src="./vault.js"></script>
+</body></html>
